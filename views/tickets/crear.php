@@ -3,6 +3,17 @@
 <section class="seccion">
     <h2 class="titulo-seccion">Registrar nuevo ticket</h2>
 
+    <?php if (count($errores) > 0) { ?>
+        <div class="aviso aviso-error">
+            <p><strong>El servidor rechazó el registro:</strong></p>
+            <ul>
+                <?php foreach ($errores as $error) { ?>
+                    <li><?php echo htmlspecialchars($error); ?></li>
+                <?php } ?>
+            </ul>
+        </div>
+    <?php } ?>
+    
     <form class="formulario" id="formulario-ticket"
           action="index.php?controlador=ticket&amp;accion=guardar" method="POST">
 

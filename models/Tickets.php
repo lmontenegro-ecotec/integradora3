@@ -65,4 +65,34 @@ class Ticket
         return $conexion->query($sql)->fetchAll();
     }
 
+    /**
+     * Inserta un ticket nuevo y devuelve el id generado.
+     * El código (TK-2026-0001) lo asigna un trigger de MySQL.
+     */
+    public function insertar($datos)
+    {
+        $conexion = Conexion::obtener();
+
+        $sql = "INSERT INTO tickets
+                    (titulo, descripcion, solicitante, correo_solicitante,
+                     id_categoria, id_prioridad, id_tecnico, horas_estimadas)
+                VALUES
+                    (:titulo, :descripcion, :solicitante, :correo,
+                     :categoria, :prioridad, :tecnico, :horas)";
+
+        $sentencia = $conexion->prepare($sql);
+        $sentencia->execute([
+            ":titulo"      => $datos["titulo"],
+            ":descripcion" => $datos["descripcion"],
+            ":solicitante" => $datos["solicitante"],
+            ":correo"      => $datos["correo"],
+            ":categoria"   => $datos["categoria"],
+            ":prioridad"   => $datos["prioridad"],
+            ":tecnico"     => $datos["tecnico"] !== "" ? $datos["tecnico"] : null,
+            ":horas"       => $datos["horas"]
+        ]);
+
+        return $conexion->lastInsertId();
+    }    
+
 }

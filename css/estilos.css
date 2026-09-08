@@ -281,6 +281,17 @@ body {
     border-color: #c7d2fe;
 }
 
+.aviso ul {
+    margin-left: 20px;
+    margin-top: 4px;
+}
+
+.aviso-error {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border-color: #fecaca;
+}
+
 /*Pie de pagina*/
 .pie {
     background-color: var(--tinta);
