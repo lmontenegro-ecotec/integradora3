@@ -13,15 +13,16 @@
             </ul>
         </div>
     <?php } ?>
-    
+
     <form class="formulario" id="formulario-ticket"
-          action="index.php?controlador=ticket&amp;accion=guardar" method="POST">
+          action="index.php?controlador=ticket&amp;accion=guardar" method="POST" novalidate>
 
         <div class="campo">
             <label for="titulo">Título del ticket</label>
             <input type="text" id="titulo" name="titulo" maxlength="100"
                    placeholder="Resuma el problema en una línea"
                    value="<?php echo htmlspecialchars($valores["titulo"] ?? ""); ?>" />
+            <span class="error" id="error-titulo"></span>            
         </div>
 
         <div class="campo-doble">
@@ -30,6 +31,7 @@
                 <input type="text" id="solicitante" name="solicitante" maxlength="80"
                        placeholder="Nombre de quien reporta"
                        value="<?php echo htmlspecialchars($valores["solicitante"] ?? ""); ?>" />
+                <span class="error" id="error-solicitante"></span>
             </div>
 
             <div class="campo">
@@ -37,6 +39,7 @@
                 <input type="email" id="correo" name="correo" maxlength="100"
                        placeholder="usuario@siglo21.net"
                        value="<?php echo htmlspecialchars($valores["correo"] ?? ""); ?>" />
+                <span class="error" id="error-correo"></span>                       
             </div>
         </div>
 
@@ -52,6 +55,7 @@
                         </option>
                     <?php } ?>
                 </select>
+                <span class="error" id="error-categoria"></span>                
             </div>
 
             <div class="campo">
@@ -65,6 +69,7 @@
                         </option>
                     <?php } ?>
                 </select>
+                <span class="error" id="error-prioridad"></span>
             </div>
 
             <div class="campo">
@@ -72,6 +77,7 @@
                 <input type="number" id="horas" name="horas" step="0.5" min="0.5" max="100"
                        placeholder="2.5"
                        value="<?php echo htmlspecialchars($valores["horas"] ?? ""); ?>" />
+                <span class="error" id="error-horas"></span>       
             </div>
         </div>
 
@@ -86,12 +92,15 @@
                     </option>
                 <?php } ?>
             </select>
+
         </div>
 
         <div class="campo">
             <label for="descripcion">Descripción del problema</label>
             <textarea id="descripcion" name="descripcion" rows="5"
                       placeholder="Detalle qué ocurre, desde cuándo y qué se ha intentado"><?php echo htmlspecialchars($valores["descripcion"] ?? ""); ?></textarea>
+            <span class="contador" id="contador-descripcion">0 caracteres</span>                      
+            <span class="error" id="error-descripcion"></span>                      
         </div>
 
         <button class="boton boton-completo" type="submit">Guardar ticket</button>

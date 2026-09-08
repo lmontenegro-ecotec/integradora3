@@ -392,5 +392,28 @@ body {
 .boton-completo {
     width: 100%;
     margin-top: 6px;
-}    
+}
+
+/*Clase que JavaScript aplica al campo con error.
+  Se antepone .formulario para ganar en especificidad a la regla anterior.*/
+.formulario .campo-invalido {
+    border-color: var(--peligro);
+    background-color: #fef2f2;
+}
+
+.error {
+    display: block;
+    min-height: 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--peligro);
+    margin-top: 4px;
+}
+
+.contador {
+    display: block;
+    font-size: 13px;
+    color: var(--texto-suave);
+    margin-top: 4px;
+}
 }
