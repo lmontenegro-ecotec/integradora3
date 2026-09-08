@@ -5,7 +5,7 @@
  * pide al modelo que trabaje con la base y decide qué vista mostrar.
  */
 
-require_once __DIR__ . "/../models/Ticket.php";
+require_once __DIR__ . "/../models/Tickets.php";
 require_once __DIR__ . "/../models/Catalogo.php";
 require_once __DIR__ . "/../models/Seguimiento.php";
 

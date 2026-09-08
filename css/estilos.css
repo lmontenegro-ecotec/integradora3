@@ -169,153 +169,67 @@ body {
 .estado-resuelto   .tarjeta-texto::before { background-color: var(--resuelto); }
 .estado-cerrado    .tarjeta-texto::before { background-color: var(--cerrado); }
 
-/*Botones*/
-.boton {
-    display: inline-block;
-    background-color: var(--acento);
-    color: var(--superficie);
-    text-decoration: none;
-    font-family: var(--fuente);
-    font-size: 15px;
-    font-weight: 600;
-    padding: 11px 22px;
-    border: 1px solid var(--acento);
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.boton:hover {
-    background-color: var(--acento-oscuro);
-    border-color: var(--acento-oscuro);
-}
-
-.boton-claro {
-    background-color: var(--superficie);
-    color: var(--texto);
-    border-color: #cbd5e1;
-}
-
-.boton-claro:hover {
-    background-color: var(--fondo-alterno);
-    border-color: var(--texto-suave);
-    color: var(--texto);
-}
-
-.acciones-inicio {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: var(--espacio);
-}
-
-/*Tablas*/
-.tabla-contenedor {
-    overflow-x: auto;
+/*Panel de carga de trabajo*/
+.panel-carga {
     background-color: var(--superficie);
     border: 1px solid var(--borde);
     border-radius: var(--radio);
     box-shadow: var(--sombra);
+    padding: 22px 24px;
 }
 
-.tabla {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 950px;
-}
-
-.tabla thead {
-    background-color: var(--fondo-alterno);
-}
-
-.tabla th {
-    text-align: left;
-    padding: 12px 14px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--texto-suave);
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
+.carga-cifras {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 18px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
     border-bottom: 1px solid var(--borde);
 }
 
-.tabla td {
-    padding: 14px;
-    border-top: 1px solid var(--borde);
-    font-size: 14px;
-}
-
-.tabla tbody tr:hover {
-    background-color: var(--fondo);
-}
-
-.celda-codigo {
-    font-family: "Consolas", "Courier New", monospace;
+.cifra-valor {
+    display: block;
+    font-size: 24px;
     font-weight: 600;
-    color: var(--acento);
-    white-space: nowrap;
+    color: var(--tinta);
 }
 
-/*Etiqueta de prioridad: el color viene de la base de datos*/
-.etiqueta {
-    display: inline-block;
-    color: var(--superficie);
+.cifra-texto {
+    display: block;
     font-size: 12px;
-    font-weight: 600;
-    padding: 3px 11px;
-    border-radius: 20px;
-    white-space: nowrap;
+    font-weight: 500;
+    color: var(--texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-/*Avisos*/
-.aviso {
-    padding: 14px 16px;
-    border-radius: var(--radio);
-    border: 1px solid transparent;
-    margin-bottom: 16px;
-    font-size: 14px;
-}
-
-.aviso-info {
-    background-color: var(--acento-suave);
-    color: #3730a3;
-    border-color: #c7d2fe;
-}
-
-.aviso ul {
-    margin-left: 20px;
-    margin-top: 4px;
-}
-
-.aviso-error {
-    background-color: #fef2f2;
-    color: #991b1b;
-    border-color: #fecaca;
-}
-
-/*Pie de pagina*/
-.pie {
-    background-color: var(--tinta);
-    color: #94a3b8;
-    text-align: center;
-    padding: 26px var(--espacio);
+.avance-titulo {
+    display: flex;
+    justify-content: space-between;
     font-size: 13px;
-    margin-top: 40px;
+    font-weight: 600;
+    color: var(--texto-suave);
+    margin-bottom: 8px;
 }
 
-/*Pantallas pequenas*/
-@media (max-width: 700px) {
-    .navegacion a {
-        padding: 12px 14px;
-        font-size: 14px;
-    }
+.avance-barra {
+    height: 8px;
+    background-color: var(--fondo-alterno);
+    border-radius: 20px;
+    overflow: hidden;
+}
 
-    .titulo-sistema {
-        font-size: 21px;
-    }
+.avance-relleno {
+    height: 100%;
+    background-color: var(--resuelto);
+    border-radius: 20px;
+}
 
-    .encabezado-contenido {
-        text-align: center;
-    }
+.avance-nota {
+    font-size: 13px;
+    color: var(--texto-suave);
+    margin-top: 8px;
+}
 
 /*Formularios*/
 .formulario {
@@ -389,11 +303,6 @@ body {
     resize: vertical;
 }
 
-.boton-completo {
-    width: 100%;
-    margin-top: 6px;
-}
-
 /*Clase que JavaScript aplica al campo con error.
   Se antepone .formulario para ganar en especificidad a la regla anterior.*/
 .formulario .campo-invalido {
@@ -415,6 +324,51 @@ body {
     font-size: 13px;
     color: var(--texto-suave);
     margin-top: 4px;
+}
+
+/*Botones*/
+.boton {
+    display: inline-block;
+    background-color: var(--acento);
+    color: var(--superficie);
+    text-decoration: none;
+    font-family: var(--fuente);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 11px 22px;
+    border: 1px solid var(--acento);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.boton:hover {
+    background-color: var(--acento-oscuro);
+    border-color: var(--acento-oscuro);
+}
+
+.boton-claro {
+    background-color: var(--superficie);
+    color: var(--texto);
+    border-color: #cbd5e1;
+}
+
+.boton-claro:hover {
+    background-color: var(--fondo-alterno);
+    border-color: var(--texto-suave);
+    color: var(--texto);
+}
+
+.boton-completo {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.acciones-formulario,
+.acciones-inicio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: var(--espacio);
 }
 
 /*Barra de busqueda*/
@@ -462,15 +416,56 @@ body {
     margin-bottom: 10px;
 }
 
+/*Tablas*/
+.tabla-contenedor {
+    overflow-x: auto;
+    background-color: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 950px;
+}
+
+.tabla thead {
+    background-color: var(--fondo-alterno);
+}
+
+.tabla th {
+    text-align: left;
+    padding: 12px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.tabla td {
+    padding: 14px;
+    border-top: 1px solid var(--borde);
+    font-size: 14px;
+}
+
+.tabla tbody tr:hover {
+    background-color: var(--fondo);
+}
+
+.celda-codigo {
+    font-family: "Consolas", "Courier New", monospace;
+    font-weight: 600;
+    color: var(--acento);
+    white-space: nowrap;
+}
+
 .celda-numero {
     text-align: right;
     color: var(--texto-suave);
-}
-
-.aviso-exito {
-    background-color: #ecfdf5;
-    color: #065f46;
-    border-color: #a7f3d0;
 }
 
 .celda-acciones {
@@ -487,6 +482,71 @@ body {
 .enlace-accion:hover {
     color: var(--acento);
     text-decoration: underline;
+}
+
+.enlace-eliminar:hover {
+    color: var(--peligro);
+}
+
+/*Etiqueta de prioridad: el color viene de la base de datos*/
+.etiqueta {
+    display: inline-block;
+    color: var(--superficie);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 11px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+/*Etiqueta de estado con fondo suave*/
+.estado {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 11px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+}
+
+/*Se exigen las dos clases para no afectar a las tarjetas del tablero,
+  que también usan los nombres estado-abierto, estado-resuelto, etc.*/
+.estado.estado-abierto    { background-color: #eff6ff; color: var(--abierto);  border-color: #bfdbfe; }
+.estado.estado-en-proceso { background-color: #fffbeb; color: var(--proceso);  border-color: #fde68a; }
+.estado.estado-resuelto   { background-color: #ecfdf5; color: var(--resuelto); border-color: #a7f3d0; }
+.estado.estado-cerrado    { background-color: var(--fondo-alterno); color: var(--cerrado); border-color: var(--borde); }
+
+/*Avisos*/
+.aviso {
+    padding: 14px 16px;
+    border-radius: var(--radio);
+    border: 1px solid transparent;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.aviso ul {
+    margin-left: 20px;
+    margin-top: 4px;
+}
+
+.aviso-exito {
+    background-color: #ecfdf5;
+    color: #065f46;
+    border-color: #a7f3d0;
+}
+
+.aviso-error {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border-color: #fecaca;
+}
+
+.aviso-info {
+    background-color: var(--acento-suave);
+    color: #3730a3;
+    border-color: #c7d2fe;
 }
 
 /*Detalle del ticket*/
@@ -563,95 +623,28 @@ body {
     font-size: 14px;
 }
 
-.enlace-eliminar:hover {
-    color: var(--peligro);
-}
-
-.acciones-formulario {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: var(--espacio);
-}
-
-/*Panel de carga de trabajo*/
-.panel-carga {
-    background-color: var(--superficie);
-    border: 1px solid var(--borde);
-    border-radius: var(--radio);
-    box-shadow: var(--sombra);
-    padding: 22px 24px;
-}
-
-.carga-cifras {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 18px;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--borde);
-}
-
-.cifra-valor {
-    display: block;
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--tinta);
-}
-
-.cifra-texto {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--texto-suave);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.avance-titulo {
-    display: flex;
-    justify-content: space-between;
+/*Pie de pagina*/
+.pie {
+    background-color: var(--tinta);
+    color: #94a3b8;
+    text-align: center;
+    padding: 26px var(--espacio);
     font-size: 13px;
-    font-weight: 600;
-    color: var(--texto-suave);
-    margin-bottom: 8px;
+    margin-top: 40px;
 }
 
-.avance-barra {
-    height: 8px;
-    background-color: var(--fondo-alterno);
-    border-radius: 20px;
-    overflow: hidden;
-}
+/*Pantallas pequenas*/
+@media (max-width: 700px) {
+    .navegacion a {
+        padding: 12px 14px;
+        font-size: 14px;
+    }
 
-.avance-relleno {
-    height: 100%;
-    background-color: var(--resuelto);
-    border-radius: 20px;
-}
+    .titulo-sistema {
+        font-size: 21px;
+    }
 
-.avance-nota {
-    font-size: 13px;
-    color: var(--texto-suave);
-    margin-top: 8px;
-}
-
-/*Etiqueta de estado con fondo suave*/
-.estado {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 3px 11px;
-    border-radius: 20px;
-    border: 1px solid transparent;
-    white-space: nowrap;
-}
-
-/*Se exigen las dos clases para no afectar a las tarjetas del tablero,
-  que también usan los nombres estado-abierto, estado-resuelto, etc.*/
-.estado.estado-abierto    { background-color: #eff6ff; color: var(--abierto);  border-color: #bfdbfe; }
-.estado.estado-en-proceso { background-color: #fffbeb; color: var(--proceso);  border-color: #fde68a; }
-.estado.estado-resuelto   { background-color: #ecfdf5; color: var(--resuelto); border-color: #a7f3d0; }
-.estado.estado-cerrado    { background-color: var(--fondo-alterno); color: var(--cerrado); border-color: var(--borde); }
-
+    .encabezado-contenido {
+        text-align: center;
+    }
 }
