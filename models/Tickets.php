@@ -95,4 +95,27 @@ class Ticket
         return $conexion->lastInsertId();
     }    
 
+    /**
+     * Devuelve un ticket por su id.
+     */
+    public function obtenerPorId($id)
+    {
+        $conexion = Conexion::obtener();
+
+        $sql = "SELECT  t.*,
+                        c.nombre AS categoria,
+                        p.nombre AS prioridad, p.color,
+                        IFNULL(e.nombre, 'Sin asignar') AS tecnico
+                FROM    tickets t
+                        INNER JOIN categorias  c ON t.id_categoria = c.id_categoria
+                        INNER JOIN prioridades p ON t.id_prioridad = p.id_prioridad
+                        LEFT  JOIN tecnicos    e ON t.id_tecnico   = e.id_tecnico
+                WHERE   t.id_ticket = :id";
+
+        $sentencia = $conexion->prepare($sql);
+        $sentencia->execute([":id" => $id]);
+
+        return $sentencia->fetch();
+    }
+
 }

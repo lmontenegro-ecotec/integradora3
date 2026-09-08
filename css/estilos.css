@@ -472,4 +472,94 @@ body {
     color: #065f46;
     border-color: #a7f3d0;
 }
+
+.celda-acciones {
+    white-space: nowrap;
+}
+
+.enlace-accion {
+    color: var(--texto-suave);
+    font-weight: 500;
+    text-decoration: none;
+    margin-right: 12px;
+}
+
+.enlace-accion:hover {
+    color: var(--acento);
+    text-decoration: underline;
+}
+
+/*Detalle del ticket*/
+.detalle {
+    background-color: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 26px;
+}
+
+.detalle-titulo {
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--tinta);
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.detalle-datos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px var(--espacio);
+    margin-bottom: 22px;
+    font-size: 14px;
+}
+
+.detalle-datos strong {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detalle-subtitulo {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.detalle-descripcion {
+    font-size: 15px;
+}
+
+/*Bitacora*/
+.bitacora {
+    list-style: none;
+}
+
+.bitacora-item {
+    background-color: var(--superficie);
+    border: 1px solid var(--borde);
+    border-left: 3px solid var(--acento);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+}
+
+.bitacora-fecha {
+    font-size: 12px;
+    color: var(--texto-suave);
+    margin-right: 10px;
+}
+
+.bitacora-texto {
+    margin-top: 4px;
+    font-size: 14px;
+}
 }

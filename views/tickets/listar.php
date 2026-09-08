@@ -45,6 +45,7 @@
                         <th>Técnico</th>
                         <th>Horas</th>
                         <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,6 +63,10 @@
                             <td><?php echo htmlspecialchars($fila["tecnico"]); ?></td>
                             <td class="celda-numero"><?php echo number_format($fila["horas_estimadas"], 2); ?></td>
                             <td><?php echo htmlspecialchars($fila["estado"]); ?></td>
+                            <td class="celda-acciones">
+                                <a class="enlace-accion"
+                                   href="index.php?controlador=ticket&amp;accion=detalle&amp;id=<?php echo $fila["id_ticket"]; ?>">Ver</a>
+                            </td>                            
                         </tr>
                     <?php } ?>
                 </tbody>

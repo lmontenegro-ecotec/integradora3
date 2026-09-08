@@ -140,5 +140,22 @@ class TicketController
         $mensaje = isset($_GET["mensaje"]) ? $_GET["mensaje"] : "";
 
         require __DIR__ . "/../views/tickets/listar.php";
-    }                
+    }
+
+    /**
+     * Muestra el detalle de un ticket junto con su bitácora.
+     */
+    public function detalle()
+    {
+        $registro = $this->ticket->obtenerPorId(isset($_GET["id"]) ? $_GET["id"] : 0);
+
+        if (!$registro) {
+            header("Location: index.php?controlador=ticket&accion=listar");
+            exit;
+        }
+
+        $bitacora = $this->seguimiento->listarPorTicket($registro["id_ticket"]);
+
+        require __DIR__ . "/../views/tickets/detalle.php";
+    }                 
 }
