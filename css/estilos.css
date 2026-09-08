@@ -574,4 +574,84 @@ body {
     margin-top: var(--espacio);
 }
 
+/*Panel de carga de trabajo*/
+.panel-carga {
+    background-color: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 22px 24px;
+}
+
+.carga-cifras {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 18px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.cifra-valor {
+    display: block;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--tinta);
+}
+
+.cifra-texto {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.avance-titulo {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--texto-suave);
+    margin-bottom: 8px;
+}
+
+.avance-barra {
+    height: 8px;
+    background-color: var(--fondo-alterno);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.avance-relleno {
+    height: 100%;
+    background-color: var(--resuelto);
+    border-radius: 20px;
+}
+
+.avance-nota {
+    font-size: 13px;
+    color: var(--texto-suave);
+    margin-top: 8px;
+}
+
+/*Etiqueta de estado con fondo suave*/
+.estado {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 11px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+}
+
+/*Se exigen las dos clases para no afectar a las tarjetas del tablero,
+  que también usan los nombres estado-abierto, estado-resuelto, etc.*/
+.estado.estado-abierto    { background-color: #eff6ff; color: var(--abierto);  border-color: #bfdbfe; }
+.estado.estado-en-proceso { background-color: #fffbeb; color: var(--proceso);  border-color: #fde68a; }
+.estado.estado-resuelto   { background-color: #ecfdf5; color: var(--resuelto); border-color: #a7f3d0; }
+.estado.estado-cerrado    { background-color: var(--fondo-alterno); color: var(--cerrado); border-color: var(--borde); }
+
 }

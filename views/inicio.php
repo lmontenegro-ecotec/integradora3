@@ -23,6 +23,54 @@
 </section>
 
 <section class="seccion">
+    <h2 class="titulo-seccion">Carga de trabajo</h2>
+
+    <div class="panel-carga">
+        <div class="carga-cifras">
+            <div class="cifra">
+                <span class="cifra-valor"><?php echo $carga["total_tickets"]; ?></span>
+                <span class="cifra-texto">Tickets registrados</span>
+            </div>
+
+            <div class="cifra">
+                <span class="cifra-valor"><?php echo number_format($carga["total_horas"], 2); ?></span>
+                <span class="cifra-texto">Horas estimadas</span>
+            </div>
+
+            <div class="cifra">
+                <span class="cifra-valor"><?php echo number_format($carga["horas_pendientes"], 2); ?></span>
+                <span class="cifra-texto">Horas pendientes</span>
+            </div>
+
+            <div class="cifra">
+                <span class="cifra-valor"><?php echo number_format($carga["promedio_horas"], 2); ?></span>
+                <span class="cifra-texto">Promedio por ticket</span>
+            </div>
+        </div>
+
+        <div class="avance">
+            <div class="avance-titulo">
+                <span>Avance de atención</span>
+                <span><?php echo number_format($carga["porcentaje_avance"], 1); ?>%</span>
+            </div>
+
+            <div class="avance-barra">
+                <div class="avance-relleno" style="width: <?php echo $carga["porcentaje_avance"]; ?>%"></div>
+            </div>
+
+            <?php if ($carga["hay_pendientes"]) { ?>
+                <p class="avance-nota">
+                    Quedan <?php echo number_format($carga["horas_pendientes"], 2); ?> horas
+                    de trabajo por atender.
+                </p>
+            <?php } else { ?>
+                <p class="avance-nota">No hay trabajo pendiente en la mesa de ayuda.</p>
+            <?php } ?>
+        </div>
+    </div>
+</section>
+
+<section class="seccion">
     <h2 class="titulo-seccion">Últimos tickets registrados</h2>
 
     <?php if (count($ultimos) === 0) { ?>
@@ -50,7 +98,11 @@
                                     <?php echo htmlspecialchars($fila["prioridad"]); ?>
                                 </span>
                             </td>
-                            <td><?php echo htmlspecialchars($fila["estado"]); ?></td>
+                            <td>
+                                <span class="estado <?php echo claseEstado($fila["estado"]); ?>">
+                                    <?php echo htmlspecialchars($fila["estado"]); ?>
+                                </span>
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>

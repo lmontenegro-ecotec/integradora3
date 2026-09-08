@@ -66,7 +66,11 @@
                             </td>
                             <td><?php echo htmlspecialchars($fila["tecnico"]); ?></td>
                             <td class="celda-numero"><?php echo number_format($fila["horas_estimadas"], 2); ?></td>
-                            <td><?php echo htmlspecialchars($fila["estado"]); ?></td>
+                            <td>
+                                <span class="estado <?php echo claseEstado($fila["estado"]); ?>">
+                                    <?php echo htmlspecialchars($fila["estado"]); ?>
+                                </span>
+                            </td>
                             <td class="celda-acciones">
                                 <a class="enlace-accion"
                                     href="index.php?controlador=ticket&amp;accion=detalle&amp;id=<?php echo $fila["id_ticket"]; ?>">Ver</a>

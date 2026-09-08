@@ -162,5 +162,57 @@ class Ticket
         $sentencia = $conexion->prepare("DELETE FROM tickets WHERE id_ticket = :id");
 
         return $sentencia->execute([":id" => $id]);
+    }
+
+    /**
+     * Calcula la carga de trabajo de la mesa de ayuda.
+     * Recorre los registros con un while y fetch(), que devuelve
+     * una fila por vuelta y false cuando ya no quedan más.
+     */
+    public function resumenCarga()
+    {
+        $conexion = Conexion::obtener();
+        $sentencia = $conexion->query("SELECT estado, horas_estimadas FROM tickets");
+
+        $totalTickets = 0;
+        $totalHoras = 0;
+        $horasCerradas = 0;
+
+        while ($fila = $sentencia->fetch()) {
+            $totalTickets = $totalTickets + 1;
+            $totalHoras = $totalHoras + $fila["horas_estimadas"];
+
+            if ($fila["estado"] === "Resuelto" || $fila["estado"] === "Cerrado") {
+                $horasCerradas = $horasCerradas + $fila["horas_estimadas"];
+            }
+        }
+
+        /* Resta: lo que todavía falta por atender */
+        $horasPendientes = $totalHoras - $horasCerradas;
+
+        /* División y multiplicación, cuidando no dividir para cero */
+        $promedioHoras = 0;
+        $porcentajeAvance = 0;
+
+        if ($totalTickets > 0) {
+            $promedioHoras = $totalHoras / $totalTickets;
+        }
+
+        if ($totalHoras > 0) {
+            $porcentajeAvance = ($horasCerradas / $totalHoras) * 100;
+        }
+
+        /* Variable booleana: sirve para decidir qué mensaje mostrar */
+        $hayPendientes = $horasPendientes > 0;
+
+        return [
+            "total_tickets"     => $totalTickets,
+            "total_horas"       => $totalHoras,
+            "horas_cerradas"    => $horasCerradas,
+            "horas_pendientes"  => $horasPendientes,
+            "promedio_horas"    => $promedioHoras,
+            "porcentaje_avance" => $porcentajeAvance,
+            "hay_pendientes"    => $hayPendientes
+        ];
     }    
 }

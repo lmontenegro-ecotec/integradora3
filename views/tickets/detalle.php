@@ -18,7 +18,12 @@
             </p>
             <p><strong>Técnico</strong> <?php echo htmlspecialchars($registro["tecnico"]); ?></p>
             <p><strong>Horas estimadas</strong> <?php echo number_format($registro["horas_estimadas"], 2); ?></p>
-            <p><strong>Estado</strong> <?php echo htmlspecialchars($registro["estado"]); ?></p>
+            <p>
+                <strong>Estado</strong>
+                <span class="estado <?php echo claseEstado($registro["estado"]); ?>">
+                    <?php echo htmlspecialchars($registro["estado"]); ?>
+                </span>
+            </p>
             <p><strong>Registrado</strong> <?php echo date("d/m/Y H:i", strtotime($registro["fecha_creacion"])); ?></p>
         </div>
 

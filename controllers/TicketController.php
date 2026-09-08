@@ -29,6 +29,7 @@ class TicketController
     {
         $resumen = $this->ticket->contarPorEstado();
         $ultimos = $this->ticket->listar();
+        $carga = $this->ticket->resumenCarga();
 
         require __DIR__ . "/../views/inicio.php";
     }
