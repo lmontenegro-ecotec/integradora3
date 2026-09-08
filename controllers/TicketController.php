@@ -76,7 +76,7 @@ class TicketController
         $idTicket = $this->ticket->insertar($valores);
         $this->seguimiento->insertar($idTicket, "Ticket registrado en el sistema.", "Abierto");
 
-        header("Location: index.php?controlador=ticket&accion=inicio");
+        header("Location: index.php?controlador=ticket&accion=listar&mensaje=creado");        
         exit;
     }
 
@@ -127,5 +127,18 @@ class TicketController
         }
 
         return $errores;
-    }            
+    }
+
+    /**
+     * Muestra la tabla de tickets con búsqueda y filtro por estado.
+     */
+    public function listar()
+    {
+        $busqueda = trim((isset($_GET["busqueda"]) ? $_GET["busqueda"] : ""));
+        $estado = isset($_GET["estado"]) ? $_GET["estado"] : "";
+        $tickets = $this->ticket->listar($busqueda, $estado);
+        $mensaje = isset($_GET["mensaje"]) ? $_GET["mensaje"] : "";
+
+        require __DIR__ . "/../views/tickets/listar.php";
+    }                
 }

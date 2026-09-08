@@ -416,4 +416,60 @@ body {
     color: var(--texto-suave);
     margin-top: 4px;
 }
+
+/*Barra de busqueda*/
+.barra-busqueda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background-color: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.barra-busqueda input[type="text"] {
+    flex: 1 1 280px;
+    font-family: var(--fuente);
+    font-size: 15px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+}
+
+.barra-busqueda select {
+    font-family: var(--fuente);
+    font-size: 15px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: var(--superficie);
+    color: var(--texto);
+}
+
+.barra-busqueda input:focus,
+.barra-busqueda select:focus {
+    outline: none;
+    border-color: var(--acento);
+    box-shadow: 0 0 0 3px var(--acento-suave);
+}
+
+.resultado-conteo {
+    font-size: 14px;
+    color: var(--texto-suave);
+    margin-bottom: 10px;
+}
+
+.celda-numero {
+    text-align: right;
+    color: var(--texto-suave);
+}
+
+.aviso-exito {
+    background-color: #ecfdf5;
+    color: #065f46;
+    border-color: #a7f3d0;
+}
 }
