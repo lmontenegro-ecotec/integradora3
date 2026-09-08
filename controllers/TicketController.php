@@ -157,5 +157,94 @@ class TicketController
         $bitacora = $this->seguimiento->listarPorTicket($registro["id_ticket"]);
 
         require __DIR__ . "/../views/tickets/detalle.php";
-    }                 
+    }
+    
+    /**
+     * Muestra el formulario con los datos de un ticket para modificarlo.
+     */
+    public function editar()
+    {
+        $registro = $this->ticket->obtenerPorId(isset($_GET["id"]) ? $_GET["id"] : 0);
+
+        if (!$registro) {
+            header("Location: index.php?controlador=ticket&accion=listar");
+            exit;
+        }
+
+        $categorias = $this->catalogo->categorias();
+        $prioridades = $this->catalogo->prioridades();
+        $tecnicos = $this->catalogo->tecnicos();
+        $errores = [];
+
+        require __DIR__ . "/../views/tickets/editar.php";
+    }
+
+    /**
+     * Guarda los cambios de un ticket y registra el movimiento en la bitácora.
+     */
+    public function actualizar()
+    {
+        $id = isset($_POST["id_ticket"]) ? $_POST["id_ticket"] : 0;
+        $anterior = $this->ticket->obtenerPorId($id);
+
+        if (!$anterior) {
+            header("Location: index.php?controlador=ticket&accion=listar");
+            exit;
+        }
+
+        $valores = [
+            "titulo"      => trim((isset($_POST["titulo"]) ? $_POST["titulo"] : "")),
+            "descripcion" => trim((isset($_POST["descripcion"]) ? $_POST["descripcion"] : "")),
+            "solicitante" => trim((isset($_POST["solicitante"]) ? $_POST["solicitante"] : "")),
+            "correo"      => trim((isset($_POST["correo"]) ? $_POST["correo"] : "")),
+            "categoria"   => isset($_POST["categoria"]) ? $_POST["categoria"] : "",
+            "prioridad"   => isset($_POST["prioridad"]) ? $_POST["prioridad"] : "",
+            "tecnico"     => isset($_POST["tecnico"]) ? $_POST["tecnico"] : "",
+            "horas"       => isset($_POST["horas"]) ? $_POST["horas"] : "",
+            "estado"      => isset($_POST["estado"]) ? $_POST["estado"] : "Abierto"
+        ];
+
+        $errores = $this->validar($valores);
+
+        if (count($errores) > 0) {
+            $registro = array_merge($anterior, $valores);
+            $categorias = $this->catalogo->categorias();
+            $prioridades = $this->catalogo->prioridades();
+            $tecnicos = $this->catalogo->tecnicos();
+
+            require __DIR__ . "/../views/tickets/editar.php";
+            return;
+        }
+
+        $this->ticket->actualizar($id, $valores);
+
+        // Si el estado cambió se deja constancia en la bitácora
+        if ($anterior["estado"] !== $valores["estado"]) {
+            $this->seguimiento->insertar(
+                $id,
+                "El estado cambió de " . $anterior["estado"] . " a " . $valores["estado"] . ".",
+                $valores["estado"]
+            );
+        } else {
+            $this->seguimiento->insertar($id, "Se actualizaron los datos del ticket.", $valores["estado"]);
+        }
+
+        header("Location: index.php?controlador=ticket&accion=listar&mensaje=actualizado");
+        exit;
+    }
+
+    /**
+     * Elimina un ticket.
+     */
+    public function eliminar()
+    {
+        $id = isset($_GET["id"]) ? $_GET["id"] : 0;
+
+        if ($id > 0) {
+            $this->ticket->eliminar($id);
+        }
+
+        header("Location: index.php?controlador=ticket&accion=listar&mensaje=eliminado");
+        exit;
+    }    
 }

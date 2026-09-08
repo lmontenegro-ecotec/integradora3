@@ -5,6 +5,10 @@
 
     <?php if ($mensaje === "creado") { ?>
         <p class="aviso aviso-exito">El ticket se registró correctamente.</p>
+    <?php } elseif ($mensaje === "actualizado") { ?>
+        <p class="aviso aviso-exito">El ticket se actualizó correctamente.</p>
+    <?php } elseif ($mensaje === "eliminado") { ?>
+        <p class="aviso aviso-exito">El ticket se eliminó correctamente.</p>
     <?php } ?>
 
     <!--Busqueda y filtro-->
@@ -65,7 +69,12 @@
                             <td><?php echo htmlspecialchars($fila["estado"]); ?></td>
                             <td class="celda-acciones">
                                 <a class="enlace-accion"
-                                   href="index.php?controlador=ticket&amp;accion=detalle&amp;id=<?php echo $fila["id_ticket"]; ?>">Ver</a>
+                                    href="index.php?controlador=ticket&amp;accion=detalle&amp;id=<?php echo $fila["id_ticket"]; ?>">Ver</a>
+                                <a class="enlace-accion"                                    
+                                    href="index.php?controlador=ticket&amp;accion=editar&amp;id=<?php echo $fila["id_ticket"]; ?>">Editar</a>
+                                <a class="enlace-accion enlace-eliminar"
+                                   href="index.php?controlador=ticket&amp;accion=eliminar&amp;id=<?php echo $fila["id_ticket"]; ?>"
+                                   data-codigo="<?php echo htmlspecialchars($fila["codigo"]); ?>">Eliminar</a>                                    
                             </td>                            
                         </tr>
                     <?php } ?>

@@ -11,6 +11,7 @@
 const formularioTicket = document.getElementById("formulario-ticket");
 const campoDescripcion = document.getElementById("descripcion");
 const contadorDescripcion = document.getElementById("contador-descripcion");
+const enlacesEliminar = document.querySelectorAll(".enlace-eliminar");
 
 
 /* ------------------------------------------------------------
@@ -158,3 +159,18 @@ if (campoDescripcion !== null) {
     campoDescripcion.addEventListener("input", actualizarContador);
     actualizarContador();
 }
+
+/* ------------------------------------------------------------
+   5. CONFIRMACION ANTES DE ELIMINAR
+   ------------------------------------------------------------ */
+
+enlacesEliminar.forEach(function (enlace) {
+    enlace.addEventListener("click", function (evento) {
+        const codigo = enlace.getAttribute("data-codigo");
+        const confirmado = confirm("¿Está seguro de eliminar el ticket " + codigo + "? Esta acción no se puede deshacer.");
+
+        if (confirmado === false) {
+            evento.preventDefault();
+        }
+    });
+});

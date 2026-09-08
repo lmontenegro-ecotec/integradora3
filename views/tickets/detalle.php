@@ -45,8 +45,9 @@
     <?php } ?>
 
     <p class="acciones-inicio">
+        <a class="boton" href="index.php?controlador=ticket&amp;accion=editar&amp;id=<?php echo $registro["id_ticket"]; ?>">Editar ticket</a>
         <a class="boton boton-claro" href="index.php?controlador=ticket&amp;accion=listar">Volver al listado</a>
-    </p>
+    </p>    
 </section>
 
 <?php require __DIR__ . "/../layouts/pie.php"; ?>

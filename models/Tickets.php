@@ -118,4 +118,49 @@ class Ticket
         return $sentencia->fetch();
     }
 
+    /**
+     * Actualiza los datos de un ticket existente.
+     */
+    public function actualizar($id, $datos)
+    {
+        $conexion = Conexion::obtener();
+
+        $sql = "UPDATE tickets
+                SET    titulo = :titulo,
+                       descripcion = :descripcion,
+                       solicitante = :solicitante,
+                       correo_solicitante = :correo,
+                       id_categoria = :categoria,
+                       id_prioridad = :prioridad,
+                       id_tecnico = :tecnico,
+                       horas_estimadas = :horas,
+                       estado = :estado
+                WHERE  id_ticket = :id";
+
+        $sentencia = $conexion->prepare($sql);
+
+        return $sentencia->execute([
+            ":titulo"      => $datos["titulo"],
+            ":descripcion" => $datos["descripcion"],
+            ":solicitante" => $datos["solicitante"],
+            ":correo"      => $datos["correo"],
+            ":categoria"   => $datos["categoria"],
+            ":prioridad"   => $datos["prioridad"],
+            ":tecnico"     => $datos["tecnico"] !== "" ? $datos["tecnico"] : null,
+            ":horas"       => $datos["horas"],
+            ":estado"      => $datos["estado"],
+            ":id"          => $id
+        ]);
+    }
+
+    /**
+     * Elimina un ticket. Sus seguimientos se borran en cascada.
+     */
+    public function eliminar($id)
+    {
+        $conexion = Conexion::obtener();
+        $sentencia = $conexion->prepare("DELETE FROM tickets WHERE id_ticket = :id");
+
+        return $sentencia->execute([":id" => $id]);
+    }    
 }
