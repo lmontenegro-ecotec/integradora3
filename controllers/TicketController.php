@@ -29,4 +29,17 @@ class TicketController
 
         require __DIR__ . "/../views/inicio.php";
     }
+
+        /**
+     * Muestra el formulario de registro.
+     */
+    public function crear()
+    {
+        $categorias = $this->catalogo->categorias();
+        $prioridades = $this->catalogo->prioridades();
+        $tecnicos = $this->catalogo->tecnicos();
+        $valores = [];
+
+        require __DIR__ . "/../views/tickets/crear.php";
+    }
 }

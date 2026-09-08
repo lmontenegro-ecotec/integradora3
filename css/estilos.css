@@ -305,4 +305,81 @@ body {
     .encabezado-contenido {
         text-align: center;
     }
+
+/*Formularios*/
+.formulario {
+    background-color: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 26px;
+}
+
+.campo {
+    margin-bottom: 18px;
+}
+
+.campo-doble,
+.campo-triple {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.campo-doble .campo {
+    flex: 1 1 240px;
+}
+
+.campo-triple .campo {
+    flex: 1 1 180px;
+}
+
+.formulario label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--texto);
+    margin-bottom: 6px;
+}
+
+.opcional {
+    font-weight: 400;
+    color: var(--texto-suave);
+    font-size: 13px;
+}
+
+.formulario input,
+.formulario select,
+.formulario textarea {
+    width: 100%;
+    font-family: var(--fuente);
+    font-size: 15px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: var(--superficie);
+    color: var(--texto);
+}
+
+.formulario input::placeholder,
+.formulario textarea::placeholder {
+    color: #94a3b8;
+}
+
+.formulario input:focus,
+.formulario select:focus,
+.formulario textarea:focus {
+    outline: none;
+    border-color: var(--acento);
+    box-shadow: 0 0 0 3px var(--acento-suave);
+}
+
+.formulario textarea {
+    resize: vertical;
+}
+
+.boton-completo {
+    width: 100%;
+    margin-top: 6px;
+}    
 }
