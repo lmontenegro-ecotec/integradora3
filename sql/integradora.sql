@@ -80,3 +80,60 @@ CREATE TABLE secuencias (
     nombre VARCHAR(20) PRIMARY KEY,
     valor  INT NOT NULL DEFAULT 0
 );
+
+INSERT INTO secuencias (nombre, valor) VALUES ('ticket', 0);
+
+-- ------------------------------------------------------------
+-- Trigger: asigna automáticamente un código tipo TK-2026-0001
+-- ------------------------------------------------------------
+DELIMITER $$
+
+CREATE TRIGGER tr_ticket_codigo
+BEFORE INSERT ON tickets
+FOR EACH ROW
+BEGIN
+    DECLARE siguiente INT;
+
+    UPDATE secuencias SET valor = valor + 1 WHERE nombre = 'ticket';
+    SELECT valor INTO siguiente FROM secuencias WHERE nombre = 'ticket';
+
+    SET NEW.codigo = CONCAT('TK-', YEAR(CURDATE()), '-', LPAD(siguiente, 4, '0'));
+END$$
+
+DELIMITER ;
+
+-- ------------------------------------------------------------
+-- Datos iniciales de los catálogos
+-- ------------------------------------------------------------
+INSERT INTO categorias (nombre) VALUES
+    ('Hardware'),
+    ('Software'),
+    ('Redes'),
+    ('Accesos y Contraseñas'),
+    ('Correo Electrónico');
+
+INSERT INTO prioridades (nombre, color) VALUES
+    ('Baja',     '#059669'),
+    ('Media',    '#2563eb'),
+    ('Alta',     '#d97706'),
+    ('Crítica',  '#dc2626');
+
+INSERT INTO tecnicos (nombre, correo) VALUES
+    ('Lenin Montenegro', 'lmontenegro@siglo21.net'),
+    ('Andrea Vera',      'avera@siglo21.net'),
+    ('Carlos Zambrano',  'czambrano@siglo21.net');
+
+-- ------------------------------------------------------------
+-- Tickets de ejemplo
+-- ------------------------------------------------------------
+INSERT INTO tickets (titulo, descripcion, solicitante, correo_solicitante, id_categoria, id_prioridad, id_tecnico, horas_estimadas, estado) VALUES
+    ('La impresora de contabilidad no responde', 'El equipo aparece en línea pero no imprime ningún documento desde ayer.', 'María Salazar', 'msalazar@siglo21.net', 1, 3, 1, 2.00, 'En Proceso'),
+    ('Solicitud de acceso al sistema de inventario', 'Se requiere crear usuario para el nuevo asistente de bodega.', 'Jorge Piedra', 'jpiedra@siglo21.net', 4, 2, 2, 1.00, 'Abierto'),
+    ('Correo institucional rebota los envíos', 'Los mensajes enviados a clientes externos regresan con error de entrega.', 'Ana Cedeño', 'acedeno@siglo21.net', 5, 4, 1, 3.50, 'Resuelto');
+
+INSERT INTO seguimientos (id_ticket, comentario, estado) VALUES
+    (1, 'Ticket registrado en el sistema.', 'Abierto'),
+    (1, 'Se revisó la cola de impresión y se reinició el spooler.', 'En Proceso'),
+    (2, 'Ticket registrado en el sistema.', 'Abierto'),
+    (3, 'Ticket registrado en el sistema.', 'Abierto'),
+    (3, 'Se corrigió el registro SPF del dominio.', 'Resuelto');
